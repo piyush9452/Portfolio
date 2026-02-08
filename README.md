@@ -1,16 +1,40 @@
-# 🌐 Personal Portfolio Website
+# Piyush Kumar - Portfolio
 
-Welcome to my **personal portfolio website**! This site showcases my work, skills, and projects as a Frontend Developer . It's designed to be visually appealing, fully responsive, and informative.
+A modern, responsive personal portfolio website built with React, Vite, and Tailwind CSS.
 
-## 🔗 Live Website
+## 🚀 Features
+- **Modern UI/UX**: Clean dark theme with professional typography and spacing.
+- **Responsive Design**: Fully optimized for mobile, tablet, and desktop.
+- **Performance**: Fast loading speeds using Vite and optimized assets.
+- **SEO Optimized**: Proper meta tags and structure for better visibility.
 
-👉 [View Live Portfolio](https://portfolio-git-main-piyush9452s-projects.vercel.app/) 
+## 🛠️ Tech Stack
+- **Frontend**: React.js
+- **Styling**: Tailwind CSS v4
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
----
+## 🏃‍♂️ Getting Started
 
-## 🛠️ Built With
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-- **HTML5**
-- **CSS3**
-- **JavaScript**
-- **Git & GitHub**
+2. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for Production**
+   ```bash
+   npm run build
+   ```
+
+## 📂 Project Structure
+- `src/components`: Reusable UI components (Hero, About, Projects, etc.)
+- `src/App.jsx`: Main application layout
+- `src/index.css`: Global styles and Tailwind imports
+
+## 📝 License
+MIT

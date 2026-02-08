@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-100: #f1f5f9;
+}
+
+/* Custom base styles */
+body {
+  background-color: var(--color-slate-900);
+  color: var(--color-slate-100);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle radial gradient for dark professional depth */
+.dark-radial {
+  background-image: radial-gradient(1200px 600px at 20% -10%, rgba(37, 99, 235, 0.15), transparent),
+    radial-gradient(800px 400px at 80% 120%, rgba(8, 145, 178, 0.1), transparent);
+}
