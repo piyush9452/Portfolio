@@ -14,14 +14,14 @@ const Contact = () => {
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
         <a 
-          href="mailto:piyush@example.com" 
+          href="mailto:talktech64@gmail.com" 
           className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-blue-500 text-blue-500 font-semibold rounded-lg hover:bg-blue-500/10 transition-colors"
         >
           <Mail size={20} />
           Say Hello
         </a>
         <a 
-          href="https://linkedin.com" 
+          href="https://www.linkedin.com/in/piyush-kumar01/" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-8 py-4 bg-slate-800 text-slate-300 font-semibold rounded-lg hover:bg-slate-700 transition-colors"
@@ -33,10 +33,10 @@ const Contact = () => {
 
       <div className="mt-20 pt-10 border-t border-slate-800 flex flex-col items-center gap-4">
         <div className="flex gap-6 text-slate-400">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
+          <a href="https://github.com/piyush9452" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
             <Github size={24} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
+          <a href="https://www.linkedin.com/in/piyush-kumar01/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
             <Linkedin size={24} />
           </a>
         </div>
