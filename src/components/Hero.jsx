@@ -29,7 +29,7 @@ const Hero = () => {
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>
           <a 
-            href="#contact"
+            href="https://api.whatsapp.com/send/?phone=918604900685&text=Hello&type=phone_number&app_absent=0"
             className="inline-flex items-center justify-center px-6 py-3 border border-slate-700 text-base font-medium rounded-lg text-slate-300 hover:bg-slate-800 transition-colors"
           >
             Contact Me
@@ -37,10 +37,10 @@ const Hero = () => {
         </div>
 
         <div className="flex gap-6 pt-8 text-slate-400">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          <a href="https://github.com/piyush9452" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
             <Github size={24} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
+          <a href="https://www.linkedin.com/in/piyush-kumar01/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
             <Linkedin size={24} />
           </a>
         </div>
