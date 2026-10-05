@@ -1,22 +1,204 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Design tokens
+   ------------------------------------------------------------------ */
 @theme {
-  --color-slate-900: #0f172a;
-  --color-slate-800: #1e293b;
-  --color-slate-100: #f1f5f9;
+  --font-sans: "Geist Variable", "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: #080808;
+  --color-surface: #0e0e10;
+  --color-raised: #141417;
+  --color-fg: #f5f5f5;
+  --color-dim: #a1a1aa;
+  --color-mute: #8a8a93;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --color-accent: #7c9cff;
+  --color-accent-soft: rgb(124 156 255 / 0.12);
+  --color-live: #4ade80;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Custom base styles */
-body {
-  background-color: var(--color-slate-900);
-  color: var(--color-slate-100);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: rgb(124 156 255 / 0.3); color: #fff; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
 }
 
-/* Subtle radial gradient for dark professional depth */
-.dark-radial {
-  background-image: radial-gradient(1200px 600px at 20% -10%, rgba(37, 99, 235, 0.15), transparent),
-    radial-gradient(800px 400px at 80% 120%, rgba(8, 145, 178, 0.1), transparent);
+/* ------------------------------------------------------------------
+   Atmosphere: grain + page glow
+   ------------------------------------------------------------------ */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+.hero-glow {
+  background: radial-gradient(
+    600px circle at var(--gx, 70%) var(--gy, 20%),
+    rgb(124 156 255 / 0.14),
+    transparent 60%
+  );
+  transition: background 0.2s linear;
+}
+
+/* ------------------------------------------------------------------
+   Motion
+   ------------------------------------------------------------------ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+.rise { animation: rise 0.8s var(--ease-out-soft) both; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft),
+    translate 0.3s var(--ease-out-soft),
+    border-color 0.3s;
+}
+.reveal[data-visible="true"] { opacity: 1; transform: none; }
+
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: pulse-ring 2s var(--ease-out-soft) infinite;
+}
+
+.overlay-in { animation: overlay-in 0.45s var(--ease-out-soft) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .status-dot::after { display: none; }
+}
+
+/* ------------------------------------------------------------------
+   Components (layered so utilities can override them)
+   ------------------------------------------------------------------ */
+@layer components {
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s var(--ease-out-soft), color 0.2s;
+}
+.link-underline:hover,
+.link-underline:focus-visible { background-size: 100% 1px; }
+
+/* Tooltip for icon-only links: <a data-tip="GitHub"> */
+[data-tip] { position: relative; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--color-raised);
+  border: 1px solid var(--color-line-strong);
+  color: var(--color-fg);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s, translate 0.18s;
+}
+[data-tip]:hover::after,
+[data-tip]:focus-visible::after { opacity: 1; translate: -50% 0; }
+
+/* Card sheen that follows the pointer (set --mx/--my in JS) */
+.sheen { position: relative; isolation: isolate; }
+.sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgb(124 156 255 / 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.sheen:hover::before { opacity: 1; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 }
